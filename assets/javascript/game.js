@@ -14,11 +14,13 @@ function updateAnimalSelected() {
     console.log("The animal is " + currentAnimal);
 }
 
+
+
 updateAnimalSelected();
-console.log(currentAnimal);
 
 var animalLetters = currentAnimal.split('');
 console.log(animalLetters);
+console.log("the letters in the array are " + animalLetters);
 
 function updateGuessed() {
     document.querySelector("#guessed").innerHTML = "Letters guessed so Far: " + guesses;
@@ -29,7 +31,13 @@ updateGuessed();
 document.onkeyup = function (event) {
     if (animalLetters.includes(event.key)) {
         console.log("Correct letter " + event.key);
+        guesses.sort()
+        guesses.push(event.key);
+        updateGuessed();
+        console.log(guesses);
     } else {
         console.log("Wrong Letter " + event.key);
+        console.log(guesses);
+        updateGuessed();
     }
 }
