@@ -45,6 +45,9 @@ document.onkeyup = function (event) {
     if (animalLetters.includes(event.key)) {
         console.log("Correct letter " + event.key);
         guesses.push(event.key);
+        guesses.sort(function (a, b) {
+            return animalLetters.indexOf(a) - animalLetters.indexOf(b);
+        });
         updateGuesses();
         console.log(guesses);
     } else {
@@ -52,6 +55,7 @@ document.onkeyup = function (event) {
         console.log(guesses);
         updateGuesses();
     }
+
 }
 
 // Step 5) Compare and return the correct position of the letter guesses against the current Animal word
@@ -60,3 +64,32 @@ document.onkeyup = function (event) {
 // Step 6 ) Display the letter in the correct position order on the game,  
 // Once all letters are selected end the game.
 // if a letter is already slected, don't count this as another entry
+
+// var letters = "[a],[b],[c],[d]";
+// var userInput = [];
+// console.log(letters);
+
+// document.onkeyup = function (event) {
+//     if (letters.includes(event.key)) {
+//         userInput.push(event.key);
+//         updateUserInput();
+
+//     } else {
+//         console.log("Wrong Letter " + event.key);
+//     }
+
+//     userInput.sort(function (a, b) {
+//         return letters.indexOf(a) - userInput.indexOf(b);
+//     });
+//     console.log(userInput);
+// }
+
+
+// var g = ['j', 'q', 'k', '1', 'a', '7', '8', '9'];
+// var my = ['9', 'king', '7', 'ace'];
+
+// my.sort(function (a, b) {
+//     return g.indexOf(a) - g.indexOf(b);
+// });
+// console.log(g);
+// console.log(my);
