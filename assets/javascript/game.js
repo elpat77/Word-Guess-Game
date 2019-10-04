@@ -1,53 +1,56 @@
-//create variables needed to keep track of the score and run the game
+// create variables needed to keep track of the score and run the game
 var wins = 0;
 var guessesRemaining = 7;
-var guesses = [];
+var answerArray = [];
 
 // create an array that contains the game words
-var animals = ["turtle", "parrot", "dolphin", "elephant", "giraffe", "eagle"];
+var words = ["turtle", "parrot", "dolphin", "elephant", "giraffe", "eagle"];
+// create an array that will grab a random word 
+var animal = words[Math.floor(Math.random() * words.length)];
+console.log("Starting new game");
+console.log("The animal to guess is " + animal);
 
-//create an array that will hold the actual word to be guessed
-var currentAnimal = [];
+// create a new variable that counts the letters in the selected word, 
+// and converts it into a _ character  
+var guesses = [];
+for (var i = 0; i < animal.length; i++) {
+    guesses[i] = "_";
+}
+console.log("empty letters" + guesses);
 
-//create an array that will hold the actual letters of the word to be guessed
+
+// Take the [animal] array and break the word into letters
+// placing those letters into a new array [animallLetters] 
 var animalLetters = [];
-
-console.log(animals);
-
-//Step 1) Create a function that randomly selects a word from an array [animals] 
-//and places it into a new array [currentAnimal]
-
-function updateAnimalSelected() {
-    currentAnimal = animals[Math.floor(Math.random() * animals.length)];
-    console.log("Starting new game");
-    console.log("The animal is " + currentAnimal);
-}
-
-updateAnimalSelected();
-
-// Step 2) Take the [currentAnimal] array and break the work into letters
-// placing those letters into a new array [animallLetters]  
-var animalLetters = currentAnimal.split('');
+var animalLetters = animal.split('');
 console.log(animalLetters);
-console.log("the letters in the array are " + animalLetters);
+console.log("the letters in the animal array are " + animalLetters);
 
-// Step 3) Create a function which update the letters that the user inputs
+
+// Create a function which displays the guesses variable.  
 function updateGuesses() {
-    document.querySelector("#guessed").innerHTML = "Letters guessed so Far: " + guesses;
+    document.querySelector("#guessed").innerHTML = "Your guesses will display here: " + guesses;
 }
-
+// starts the function, since the arrayis empty, it should start with only "_" up to the animal word length
 updateGuesses();
 
-//Styep 4)create a conditional which takes the user input and pushes it into the guesses variable 
-//if the letter is present in the animalLetters array
+// Create a conditional which takes the user input and pushes it into the guesses variable 
+// if the letter is present in the animalLetters array
 
 document.onkeyup = function (event) {
     if (animalLetters.includes(event.key)) {
-        console.log("Correct letter " + event.key);
+        //pushes that word into the array, need to figure out how to push it into the apropiate space
         guesses.push(event.key);
+        console.log("Correct letter " + event.key);
+
+
+        //sorts the letter returned and places it in the correct order
         guesses.sort(function (a, b) {
             return animalLetters.indexOf(a) - animalLetters.indexOf(b);
         });
+
+
+        // guesses.splice(0, 3, event.key);
         updateGuesses();
         console.log(guesses);
     } else {
@@ -58,38 +61,5 @@ document.onkeyup = function (event) {
 
 }
 
-// Step 5) Compare and return the correct position of the letter guesses against the current Animal word
 
 
-// Step 6 ) Display the letter in the correct position order on the game,  
-// Once all letters are selected end the game.
-// if a letter is already slected, don't count this as another entry
-
-// var letters = "[a],[b],[c],[d]";
-// var userInput = [];
-// console.log(letters);
-
-// document.onkeyup = function (event) {
-//     if (letters.includes(event.key)) {
-//         userInput.push(event.key);
-//         updateUserInput();
-
-//     } else {
-//         console.log("Wrong Letter " + event.key);
-//     }
-
-//     userInput.sort(function (a, b) {
-//         return letters.indexOf(a) - userInput.indexOf(b);
-//     });
-//     console.log(userInput);
-// }
-
-
-// var g = ['j', 'q', 'k', '1', 'a', '7', '8', '9'];
-// var my = ['9', 'king', '7', 'ace'];
-
-// my.sort(function (a, b) {
-//     return g.indexOf(a) - g.indexOf(b);
-// });
-// console.log(g);
-// console.log(my);
