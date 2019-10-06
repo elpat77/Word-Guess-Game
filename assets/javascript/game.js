@@ -1,7 +1,7 @@
 // create variables needed to keep track of the score and run the game
 var wins = 0;
 var guessesRemaining = 7;
-var answerArray = [];
+
 
 // create an array that contains the game words
 var animals = ["turtle", "parrot", "dolphin", "elephant", "giraffe", "eagle"];
@@ -19,7 +19,7 @@ console.log("The animal I'm thinking of is " + randomAnimal);
 // converts and displays that number into a _ character  
 var chosenWord = [];
 for (var i = 0; i < randomAnimal.length; i++) {
-    chosenWord.push(" _ ");
+    chosenWord[i] = "_";
 }
 
 // create a function that will update the word in the front end
@@ -41,6 +41,12 @@ document.onkeyup = function (event) {
             chosenWord[i] = event.key;
             console.log("Correct letter " + event.key);
             updateGuesses();
+            console.log(" randomAnimal " + randomAnimal);
+            console.log("chosenWord " + chosenWord);
+            if (chosenWord === randomAnimal) {
+                alert('you won');
+
+            }
         }
     }
 }
