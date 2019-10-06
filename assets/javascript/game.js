@@ -4,62 +4,47 @@ var guessesRemaining = 7;
 var answerArray = [];
 
 // create an array that contains the game words
-var words = ["turtle", "parrot", "dolphin", "elephant", "giraffe", "eagle"];
-// create an array that will grab a random word 
-var animal = words[Math.floor(Math.random() * words.length)];
+var animals = ["turtle", "parrot", "dolphin", "elephant", "giraffe", "eagle"];
 console.log("Starting new game");
-console.log("The animal to guess is " + animal);
 
-// create a new variable that counts the letters in the selected word, 
-// and converts it into a _ character  
-var guesses = [];
-for (var i = 0; i < animal.length; i++) {
-    guesses[i] = "_";
+// create an array that will get a random location
+var randomNum = Math.floor(Math.random() * animals.length);
+console.log("I'm thinking of the animal at position " + randomNum);
+
+// create an array that will get the word assocaiated with that random location
+var randomAnimal = animals[randomNum];
+console.log("The animal I'm thinking of is " + randomAnimal);
+
+// create a new variable that counts the letters in the chosen word, 
+// converts and displays that number into a _ character  
+var chosenWord = [];
+for (var i = 0; i < randomAnimal.length; i++) {
+    chosenWord.push(" _ ");
 }
-console.log("empty letters" + guesses);
 
-
-// Take the [animal] array and break the word into letters
-// placing those letters into a new array [animallLetters] 
-var animalLetters = [];
-var animalLetters = animal.split('');
-console.log(animalLetters);
-console.log("the letters in the animal array are " + animalLetters);
-
-
-// Create a function which displays the guesses variable.  
+// create a function that will update the word in the front end
 function updateGuesses() {
-    document.querySelector("#guessed").innerHTML = "Your guesses will display here: " + guesses;
-}
-// starts the function, since the arrayis empty, it should start with only "_" up to the animal word length
+    document.querySelector("#guessed").innerHTML = "Word to be guessed: " + chosenWord;
+};
+
+// starts the function, since the array is empty, it will only display _ upo to the word lenght
 updateGuesses();
 
-// Create a conditional which takes the user input and pushes it into the guesses variable 
-// if the letter is present in the animalLetters array
-
+// takes the user input 
 document.onkeyup = function (event) {
-    if (animalLetters.includes(event.key)) {
-        //pushes that word into the array, need to figure out how to push it into the apropiate space
-        guesses.push(event.key);
-        console.log("Correct letter " + event.key);
+    console.log("key pressed " + event.key);
 
+    // create a loop that will update the chosen word if the kety pressed matches any of the letters in the chosen word
 
-        //sorts the letter returned and places it in the correct order
-        guesses.sort(function (a, b) {
-            return animalLetters.indexOf(a) - animalLetters.indexOf(b);
-        });
-
-
-        // guesses.splice(0, 3, event.key);
-        updateGuesses();
-        console.log(guesses);
-    } else {
-        console.log("Wrong Letter " + event.key);
-        console.log(guesses);
-        updateGuesses();
+    for (var i = 0; i < randomAnimal.length; i++) {
+        if (randomAnimal[i] === event.key) {
+            chosenWord[i] = event.key;
+            console.log("Correct letter " + event.key);
+            updateGuesses();
+        }
     }
-
 }
+
 
 
 
