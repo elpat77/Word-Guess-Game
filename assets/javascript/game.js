@@ -1,6 +1,7 @@
 // create variables needed to keep track of the score and run the game
 var wins = 0;
 var guessesRemaining = 7;
+var incorrect = [];
 
 
 // create an array that contains the game words
@@ -24,7 +25,7 @@ for (var i = 0; i < randomAnimal.length; i++) {
 
 // create a function that will update the word in the front end
 function updateGuesses() {
-    document.querySelector("#guessed").innerHTML = "Word to be guessed: " + chosenWord;
+    document.querySelector("#guessed").innerHTML = "Word to be guessed: " + chosenWord.join(' ');
 };
 
 // starts the function, since the array is empty, it will only display _ upo to the word lenght
@@ -39,18 +40,24 @@ document.onkeyup = function (event) {
     for (var i = 0; i < randomAnimal.length; i++) {
         if (randomAnimal[i] === event.key) {
             chosenWord[i] = event.key;
+            console.log("randomAnimal[i] " + randomAnimal[i]);
+            console.log("chosenWord[i] " + chosenWord[i]);
             console.log("Correct letter " + event.key);
             updateGuesses();
-            console.log(" randomAnimal " + randomAnimal);
-            console.log("chosenWord " + chosenWord);
-            if (chosenWord === randomAnimal) {
-                alert('you won');
-
-            }
+            console.log("chosenWord " + chosenWord.join(' '));
+            // return;
+        }
+        // else {
+        //     // incorrect[i] = event.key;
+        //     guessesRemaining--;
+        //     console.log(guessesRemaining);
+        //     console.log("Incorrect " + event.key);
+        //     // return;
+        // }
+        if (chosenWord.join('') === randomAnimal) {
+            updateGuesses();
+            alert('you won');
         }
     }
+
 }
-
-
-
-
